@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AppTDDApproach"
 include(":app")
- 
+include(":kotlinreview")
