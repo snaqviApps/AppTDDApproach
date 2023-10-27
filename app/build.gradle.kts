@@ -1,3 +1,7 @@
+import org.gradle.internal.impldep.org.bouncycastle.util.Properties
+import org.jetbrains.kotlin.gradle.plugin.extraProperties
+import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
@@ -6,6 +10,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
+
 
 android {
     namespace = "com.example.apptddapproach"
@@ -19,6 +24,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", "${properties["API_KEY_VALUE"]}")
     }
 
     buildTypes {
@@ -40,6 +46,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
 }
@@ -80,6 +87,10 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
+
+    //Room
+//    kapt("androidx.room:room-compiler:$room_version")         // kapt is being replaced with ksp
+    // optional - Kotlin Extensions and Coroutines support for Room
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
