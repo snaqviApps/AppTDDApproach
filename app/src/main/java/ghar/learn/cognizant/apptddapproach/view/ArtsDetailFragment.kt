@@ -1,4 +1,4 @@
-package com.example.apptddapproach.view
+package ghar.learn.cognizant.apptddapproach.view
 
 import android.os.Bundle
 import android.view.View
@@ -6,8 +6,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
-import com.example.apptddapproach.R
-import com.example.apptddapproach.databinding.FragmentArtDetailsBinding
+import ghar.learn.cognizant.apptddapproach.databinding.FragmentArtDetailsBinding
+import ghar.learn.cognizant.apptddapproach.R
 
 class ArtsDetailFragment : Fragment(R.layout.fragment_art_details) {
 

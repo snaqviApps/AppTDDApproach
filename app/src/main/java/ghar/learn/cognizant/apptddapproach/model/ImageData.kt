@@ -1,4 +1,4 @@
-package com.example.apptddapproach.model
+package ghar.learn.cognizant.apptddapproach.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -13,11 +13,11 @@ plugins {
 
 
 android {
-    namespace = "com.example.apptddapproach"
+    namespace = "ghar.learn.cognizant.apptddapproach"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.apptddapproach"
+        applicationId = "ghar.learn.cognizant.apptddapproach"
         minSdk = 30
         targetSdk = 34
         versionCode = 1
@@ -25,6 +25,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "API_KEY", "${properties["API_KEY_VALUE"]}")
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -56,7 +60,8 @@ dependencies {
     val archVersion = "2.2.0"
     val coroutineVersion = "1.7.3"
     val roomVersion = "2.6.0"
-    val daggerVersion = "2.48"
+//    val daggerVersion = "2.48"
+    val daggerVersion = "2.44"
     val lifecycleVersion = "2.6.2"
     val truthVersion = "1.1.4"
     val navigationVersion = "2.7.4"

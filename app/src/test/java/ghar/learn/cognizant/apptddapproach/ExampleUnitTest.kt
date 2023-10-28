@@ -1,4 +1,4 @@
-package com.example.apptddapproach
+package ghar.learn.cognizant.apptddapproach
 
 import org.junit.Test
 

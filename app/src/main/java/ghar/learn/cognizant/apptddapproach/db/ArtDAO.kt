@@ -1,4 +1,4 @@
-package com.example.apptddapproach.db
+package ghar.learn.cognizant.apptddapproach.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

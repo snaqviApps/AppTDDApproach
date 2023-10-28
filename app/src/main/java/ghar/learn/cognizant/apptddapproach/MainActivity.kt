@@ -1,4 +1,4 @@
-package com.example.apptddapproach
+package ghar.learn.cognizant.apptddapproach
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

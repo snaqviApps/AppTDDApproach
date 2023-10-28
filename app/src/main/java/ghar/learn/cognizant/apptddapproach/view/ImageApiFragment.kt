@@ -1,9 +1,9 @@
-package com.example.apptddapproach.view
+package ghar.learn.cognizant.apptddapproach.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.example.apptddapproach.R
+import ghar.learn.cognizant.apptddapproach.R
 
 class ImageApiFragment : Fragment(R.layout.fragment_image_api) {
 

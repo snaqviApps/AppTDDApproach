@@ -1,4 +1,4 @@
-package com.example.apptddapproach.model
+package ghar.learn.cognizant.apptddapproach.model
 
 data class ImageResponse(
     val total : Int,

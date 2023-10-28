@@ -1,16 +1,17 @@
-package com.example.apptddapproach.view
+package ghar.learn.cognizant.apptddapproach.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.apptddapproach.R
-import com.example.apptddapproach.databinding.FragmentArtsBinding
+import ghar.learn.cognizant.apptddapproach.R
+import ghar.learn.cognizant.apptddapproach.databinding.FragmentArtsBinding
 
 /**
  * a feature whereby layout can be added to super constructor, skipping the OnCreateView()
  * here we can use ViewBinding
  * */
+//class ArtsFragment : Fragment(R.layout.fragment_arts) {
 class ArtsFragment : Fragment(R.layout.fragment_arts) {
 
 //    lateinit var binding : FragmentArtsBinding
