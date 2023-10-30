@@ -9,11 +9,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ghar.learn.cognizant.apptddapproach.api.ImageApiService
 import ghar.learn.cognizant.apptddapproach.db.ArtDatabase
+import ghar.learn.cognizant.apptddapproach.util.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-private val BASE_URL: String = "https://pixabay.com"
 @Module
 //@InstallIn(ApplicationComponent::class)       ---> does not exist
 @InstallIn(SingletonComponent::class)
