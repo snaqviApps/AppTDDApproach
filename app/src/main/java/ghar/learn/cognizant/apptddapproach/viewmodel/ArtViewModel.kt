@@ -8,7 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import ghar.learn.cognizant.apptddapproach.db.Art
 import ghar.learn.cognizant.apptddapproach.model.ImageResponse
 import ghar.learn.cognizant.apptddapproach.repo.IArtRepository
-import ghar.learn.cognizant.apptddapproach.util.Resource
+import ghar.learn.cognizant.apptddapproach.util.Utils.Resource
+//import ghar.learn.cognizant.apptddapproach.util.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ class ArtViewModel @Inject constructor(
 ) : ViewModel() {
 
     // Art Fragment
-    val art = iArtRepo.getArt()
+    val arts = iArtRepo.getArt()
 
     // Art Api Fragment
     private val _images = MutableLiveData<Resource<ImageResponse>>()

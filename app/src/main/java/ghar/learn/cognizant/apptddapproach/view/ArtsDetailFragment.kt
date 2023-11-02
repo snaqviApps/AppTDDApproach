@@ -6,10 +6,16 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.RequestManager
+import dagger.hilt.android.AndroidEntryPoint
 import ghar.learn.cognizant.apptddapproach.databinding.FragmentArtDetailsBinding
 import ghar.learn.cognizant.apptddapproach.R
+import javax.inject.Inject
 
-class ArtsDetailFragment : Fragment(R.layout.fragment_art_details) {
+@AndroidEntryPoint
+class ArtsDetailFragment @Inject constructor(
+    val glide : RequestManager
+) : Fragment(R.layout.fragment_art_details) {
 
     private var fragmentBinding : FragmentArtDetailsBinding? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

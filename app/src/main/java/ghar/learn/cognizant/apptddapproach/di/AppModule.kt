@@ -2,14 +2,20 @@ package ghar.learn.cognizant.apptddapproach.di
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ghar.learn.cognizant.apptddapproach.R
 import ghar.learn.cognizant.apptddapproach.api.ImageApiService
+import ghar.learn.cognizant.apptddapproach.db.ArtDAO
 import ghar.learn.cognizant.apptddapproach.db.ArtDatabase
-import ghar.learn.cognizant.apptddapproach.util.Constants.BASE_URL
+import ghar.learn.cognizant.apptddapproach.repo.ArtRepositoryImpl
+import ghar.learn.cognizant.apptddapproach.repo.IArtRepository
+import ghar.learn.cognizant.apptddapproach.util.Utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -44,6 +50,20 @@ object AppModule {
             .create(ImageApiService::class.java)
     }
 
+    /** Glide Injection */
+    @Singleton
+    @Provides
+    fun injectGlide(@ApplicationContext context: Context) = Glide
+        .with(context)
+        .setDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.baseline_error_24)
+        )
 
+    /** Inject Repo-Interface */
+    @Singleton
+    @Provides
+    fun injectRepo(dao: ArtDAO, api:ImageApiService) = ArtRepositoryImpl(dao, api) as IArtRepository
 }
 

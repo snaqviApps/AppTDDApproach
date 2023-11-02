@@ -3,7 +3,7 @@ package ghar.learn.cognizant.apptddapproach.repo
 import androidx.lifecycle.LiveData
 import ghar.learn.cognizant.apptddapproach.db.Art
 import ghar.learn.cognizant.apptddapproach.model.ImageResponse
-import ghar.learn.cognizant.apptddapproach.util.Resource
+import ghar.learn.cognizant.apptddapproach.util.Utils.Resource
 
 interface IArtRepository {
 
