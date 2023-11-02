@@ -3,7 +3,7 @@
     <string name="art_name">Art Name</string>
     <string name="row_image">Row Image</string>
     <string name="artist_name">Artist Name</string>
-    <string name="art_year">Art Year</string>
+    <string name="art_year">Art Year: </string>
     <string name="et_enter_art_name_hint">Enter Art</string>
     <string name="et_enter_artist_name_hint">Enter Artist</string>
     <string name="et_enter_art_year_hint">Enter Year</string>
