@@ -14,13 +14,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-//class ArtViewModel @ViewModelInject                   //     ---> ViewModelInject from Hilt does not resolve to a reference
 class ArtViewModel @Inject constructor(
-    private val iArtRepo: IArtRepository
+    private val iArtRepository: IArtRepository
 ) : ViewModel() {
 
     // Art Fragment
-    val arts = iArtRepo.getArt()
+    val arts = iArtRepository.getArt()
 
     // Art Api Fragment
     private val _images = MutableLiveData<Resource<ImageResponse>>()
@@ -41,11 +40,11 @@ class ArtViewModel @Inject constructor(
     }
 
     fun deleteArt(art : Art) = viewModelScope.launch {
-        iArtRepo.deleteArt(art)
+        iArtRepository.deleteArt(art)
     }
 
     fun insertArt(art : Art) = viewModelScope.launch {
-        iArtRepo.insertArt(art)
+        iArtRepository.insertArt(art)
     }
 
     fun makeArt(name: String, artistName : String, year: String) {
@@ -73,7 +72,7 @@ class ArtViewModel @Inject constructor(
 
         _images.value = Resource.loading(null)              // pre-loading state
         viewModelScope.launch {
-            val response = iArtRepo.searchImage(searchImageName)
+            val response = iArtRepository.searchImage(searchImageName)
             _images.value = response
         }
     }

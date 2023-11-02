@@ -1,8 +1,3 @@
-import org.gradle.internal.impldep.org.bouncycastle.util.Properties
-import org.jetbrains.kotlin.gradle.plugin.extraProperties
-import org.jetbrains.kotlin.gradle.utils.loadPropertyFromResources
-import java.io.FileInputStream
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -20,7 +15,6 @@ android {
         applicationId = "ghar.learn.cognizant.apptddapproach"
         minSdk = 30
         targetSdk = 34
-        multiDexEnabled=true
         versionCode = 1
         versionName = "1.0"
 
@@ -61,14 +55,11 @@ dependencies {
     val archVersion = "2.2.0"
     val coroutineVersion = "1.7.3"
     val roomVersion = "2.6.0"
-//    val daggerVersion = "2.48"
-    val daggerVersion = "2.44"
+    val daggerVersion = "2.48"
     val lifecycleVersion = "2.6.2"
     val truthVersion = "1.1.4"
     val navigationVersion = "2.7.4"
     val glideVersion="4.16.0"
-
-    implementation("androidx.multidex:multidex:2.0.1")
 
     implementation("androidx.core:core-ktx:1.9.0")              // stable version for this project
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -108,7 +99,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.github.bumptech.glide:glide:$glideVersion")
-    //kapt 'com.github.bumptech.glide:compiler:4.13.2'
     ksp("com.github.bumptech.glide:ksp:4.14.2")
 
 
@@ -138,9 +128,7 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.43.2")
     kspAndroidTest("com.google.dagger:hilt-android-compiler:$daggerVersion")
 
-//    debugImplementation("androidx.fragment:fragment-testing:1.7.0-alpha05")   --> worked
     debugImplementation("androidx.fragment:fragment-testing:1.7.0-alpha06")
-    //debugImplementation "androidx.fragment:fragment-testing:1.3.0-alpha08"
 
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {
 //            exclude group : "org.checkerframework", module : "checker"    ----> groovy-syntax
