@@ -21,7 +21,6 @@ import javax.inject.Inject
  * a feature whereby layout can be added to super constructor, skipping the OnCreateView()
  * here we can use ViewBinding
  * */
-//class ArtsFragment : Fragment(R.layout.fragment_arts) {
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ArtsFragment @Inject constructor(
@@ -34,15 +33,13 @@ class ArtsFragment @Inject constructor(
 
     /** Swipe-to-delete viewItem:  RIGHT or LEFT */
     private val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
-        override fun onMove(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
-        ): Boolean {
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             return true
         }
+
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            val selectedArt = artRecyclerAdapter.arts[viewHolder.layoutPosition]
+            val layoutPosition = viewHolder.layoutPosition
+            val selectedArt = artRecyclerAdapter.arts[layoutPosition]
             artsViewModel.deleteArt(selectedArt)
         }
     }
@@ -60,7 +57,9 @@ class ArtsFragment @Inject constructor(
         ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.recyclerViewArt)
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(ArtsFragmentDirections.actionArtsFragmentToArtsDetailFragment())
+            findNavController().navigate(
+                ArtsFragmentDirections.actionArtsFragmentToArtsDetailFragment()
+            )
         }
     }
 
@@ -70,8 +69,8 @@ class ArtsFragment @Inject constructor(
         })
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         fragmentArtsBinding = null
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

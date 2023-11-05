@@ -58,14 +58,12 @@ class ArtRecyclerAdapter @Inject constructor(
 
     class ArtViewHolder(private val rowItem: ArtRowBinding) : ViewHolder(rowItem.root) {
     fun bind(art: Art, glide: RequestManager) {
-        rowItem.tvRowName.text = buildString { append("Art: ") }.plus(art.name)         // using buildString-approach to do the same as done #63, 64
-        rowItem.tvRowArtistName.text = Resources.getSystem().getString(R.string.artist_name).plus(": ${art.artistName}")
-        rowItem.tvRowYear.text = Resources.getSystem().getString(R.string.art_year).plus(art.year)
+        rowItem.tvRowName.text = buildString { append("Art: ") }.plus(art.name)
+        rowItem.tvRowArtistName.text = buildString { append("Artist name: ") }.plus(art.artistName)
+        rowItem.tvRowYear.text = buildString { append("Year: ") }.plus(art.year)
         glide.load(art.imageUrl).into(rowItem.imageEntry)
     }
-
-
-}
+    }
 
 }
 

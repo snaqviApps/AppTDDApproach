@@ -25,10 +25,15 @@ class ImageRecyclerAdapter @Inject constructor(
             return oldItem == newItem
         }
     }
-    private val imageDiffUtil: AsyncListDiffer<String> = AsyncListDiffer(this, diffUtil)
-    private var images
-        get() = imageDiffUtil.currentList
-        set(value) = imageDiffUtil.submitList(value)
+    private val imagesListDiffer: AsyncListDiffer<String> = AsyncListDiffer(this, diffUtil)
+//    var images: List<String>
+//        get() = imageDiffUtil.currentList
+//        set(value) = imageDiffUtil.submitList(value)
+
+    var images : List<String>
+        get() = imagesListDiffer.currentList
+        set(value) = imagesListDiffer.submitList(value)
+
     /** DiffUtil for ArtAdapter list-item diffs ENDS HERE */
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -49,12 +54,15 @@ class ImageRecyclerAdapter @Inject constructor(
         val imageUrl: String = images[position]
         holder.imageResultItem.apply {
             glide.load(imageUrl).into(searchedImageView)
-            setOnItemClickListener {
+            searchedImageView.setOnClickListener {
                 itemClickListener?.let {
                     it(imageUrl)
                 }
             }
+
         }
+
+
     }
 
 }

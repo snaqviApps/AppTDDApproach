@@ -9,7 +9,6 @@ import ghar.learn.cognizant.apptddapproach.db.Art
 import ghar.learn.cognizant.apptddapproach.model.ImageResponse
 import ghar.learn.cognizant.apptddapproach.repo.IArtRepository
 import ghar.learn.cognizant.apptddapproach.util.Utils.Resource
-//import ghar.learn.cognizant.apptddapproach.util.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,18 +23,19 @@ class ArtViewModel @Inject constructor(
     // Art Api Fragment
     private val _images = MutableLiveData<Resource<ImageResponse>>()
     val images : LiveData<Resource<ImageResponse>> = _images
+
     private val _imageSelected = MutableLiveData<String>()
     val imageSelected : LiveData<String> = _imageSelected
 
     // Art Details Fragment
-    private var _insertArtMessage = MutableLiveData<Resource<Art>>()
-    val insertArtMessage : LiveData<Resource<Art>> = _insertArtMessage
+    private var _insertArtMsg = MutableLiveData<Resource<Art>>()
+    val insertArtMsg : LiveData<Resource<Art>> = _insertArtMsg
 
-    fun resetInsertArtMessage() {
-        _insertArtMessage = MutableLiveData<Resource<Art>>()
+    fun resetInsertArtMsg() {
+        _insertArtMsg = MutableLiveData<Resource<Art>>()
     }
 
-    fun reSetSelectedImage(url: String){
+    fun setSelectedImage(url: String){
         _imageSelected.postValue(url)
     }
 
@@ -45,23 +45,25 @@ class ArtViewModel @Inject constructor(
 
     fun insertArt(art : Art) = viewModelScope.launch {
         iArtRepository.insertArt(art)
+
+
     }
 
     fun makeArt(name: String, artistName : String, year: String) {
         if(name.isEmpty() || artistName.isEmpty() || year.isEmpty()) {
-            _insertArtMessage.postValue(Resource.error("Enter name, artistName, year", null))
+            _insertArtMsg.postValue(Resource.error("Enter name, artistName, year", null))
             return
         }
         val yearInt = try {
             year.toInt()
         } catch (e: Exception){
-            _insertArtMessage.postValue(Resource.error("Year needs to be a number", null))
+            _insertArtMsg.postValue(Resource.error("Year needs to be a number", null))
             return
         }
         val art = Art(null, name, artistName, yearInt, _imageSelected.value ?: "")
         insertArt(art)
-        reSetSelectedImage("")
-        _insertArtMessage.postValue(Resource.success(art))
+        setSelectedImage("")
+        _insertArtMsg.postValue(Resource.success(art))
     }
     // Art Details Fragment ENDS
 

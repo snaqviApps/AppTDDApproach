@@ -18,6 +18,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Search Image" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewImageSearch"
         android:layout_width="match_parent"

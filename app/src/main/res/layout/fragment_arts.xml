@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,5 +34,7 @@
         app:fabSize="normal"
         android:backgroundTint="@color/material_dynamic_neutral_variant40"
         app:layout_anchor="@id/constraintLayout"
-        app:srcCompat="@drawable/ic_launcher_foreground"/>
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

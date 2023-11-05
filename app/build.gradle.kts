@@ -38,6 +38,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -61,15 +62,19 @@ dependencies {
     val navigationVersion = "2.7.4"
     val glideVersion="4.16.0"
 
-    implementation("androidx.core:core-ktx:1.9.0")              // stable version for this project
+    // common libraries
+    implementation(project(":kotlinreview"))                     // from module: kotlinreview
+
+    implementation("androidx.core:core-ktx:1.12.0")              // stable version for this project, 1.12.0 makes app crash
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
+
     //Dependency Injection:Hilt
     implementation("com.google.dagger:hilt-android:$daggerVersion")
     ksp("com.google.dagger:hilt-compiler:$daggerVersion")
-    ksp("androidx.hilt:hilt-compiler:1.0.0")
+    ksp("androidx.hilt:hilt-compiler:1.1.0")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
