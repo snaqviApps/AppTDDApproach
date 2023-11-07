@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_artsDetailFragment_to_imageApiFragment"
             app:destination="@id/imageApiFragment" />
+        <action
+            android:id="@+id/action_artsDetailFragment_to_artsFragment"
+            app:destination="@id/artsFragment" />
     </fragment>
     <fragment
         android:id="@+id/imageApiFragment"

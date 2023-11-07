@@ -3,9 +3,7 @@ package ghar.learn.cognizant.apptddapproach.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,7 +34,6 @@ class ArtsFragment @Inject constructor(
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             return true
         }
-
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val layoutPosition = viewHolder.layoutPosition
             val selectedArt = artRecyclerAdapter.arts[layoutPosition]
@@ -52,21 +49,24 @@ class ArtsFragment @Inject constructor(
         val binding = FragmentArtsBinding.bind(view)
         fragmentArtsBinding = binding
         setObservers()
-        binding.recyclerViewArt.adapter = artRecyclerAdapter
-        binding.recyclerViewArt.layoutManager = LinearLayoutManager(requireContext())
-        ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.recyclerViewArt)
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(
-                ArtsFragmentDirections.actionArtsFragmentToArtsDetailFragment()
-            )
+        binding.apply {
+            recyclerViewArt.adapter = artRecyclerAdapter
+            recyclerViewArt.layoutManager = LinearLayoutManager(requireContext())
+            ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.recyclerViewArt)        // delete on Swipe Call
+            fab.setOnClickListener {
+                findNavController().navigate(
+                    ArtsFragmentDirections.actionArtsFragmentToArtsDetailFragment()
+                )
+            }
         }
+
+
     }
 
-    private fun setObservers(){
-        artsViewModel.arts.observe(viewLifecycleOwner, Observer {
+    private fun setObservers() {
+        artsViewModel.arts.observe(viewLifecycleOwner) {
             artRecyclerAdapter.arts = it
-        })
+        }
     }
 
     override fun onDestroyView() {

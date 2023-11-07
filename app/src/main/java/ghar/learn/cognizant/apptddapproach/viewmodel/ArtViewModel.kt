@@ -8,8 +8,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import ghar.learn.cognizant.apptddapproach.db.Art
 import ghar.learn.cognizant.apptddapproach.model.ImageResponse
 import ghar.learn.cognizant.apptddapproach.repo.IArtRepository
-import ghar.learn.cognizant.apptddapproach.util.Utils.Resource
+import ghar.learn.cognizant.apptddapproach.util.Resource
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,19 +25,28 @@ class ArtViewModel @Inject constructor(
     private val _images = MutableLiveData<Resource<ImageResponse>>()
     val images : LiveData<Resource<ImageResponse>> = _images
 
-    private val _imageSelected = MutableLiveData<String>()
-    val imageSelected : LiveData<String> = _imageSelected
+    private val _selectedImage = MutableLiveData<String>()
+    val selectedImageUrl : LiveData<String> = _selectedImage
 
     // Art Details Fragment
-    private var _insertArtMsg = MutableLiveData<Resource<Art>>()
-    val insertArtMsg : LiveData<Resource<Art>> = _insertArtMsg
+      /**
+       * Below approach Lines# 33-34 does not work as the the property needs
+       * to be used in resetInsertArtMsg() method,
+       * which does not give expected results (it goes back to ArtsFragment-screen when pressed 'fab'-CTA
+       * AFTER saving first entry in ArtRecycleAdapter [at: @ArtsFragment.kt# 58 - 63 ]
+       * */
+//    private val _insertArtMessage = MutableLiveData<Resource<Art>>()
+//    val insertArtMessage : LiveData<Resource<Art>> = _insertArtMessage
+    private var _insertArtMessage = MutableLiveData<Resource<Art>>()
+    val insertArtMessage : LiveData<Resource<Art>>
+        get() = _insertArtMessage
 
     fun resetInsertArtMsg() {
-        _insertArtMsg = MutableLiveData<Resource<Art>>()
+        _insertArtMessage = MutableLiveData<Resource<Art>>()
     }
 
     fun setSelectedImage(url: String){
-        _imageSelected.postValue(url)
+        _selectedImage.postValue(url)
     }
 
     fun deleteArt(art : Art) = viewModelScope.launch {
@@ -45,33 +55,32 @@ class ArtViewModel @Inject constructor(
 
     fun insertArt(art : Art) = viewModelScope.launch {
         iArtRepository.insertArt(art)
-
-
     }
 
-    fun makeArt(name: String, artistName : String, year: String) {
-        if(name.isEmpty() || artistName.isEmpty() || year.isEmpty()) {
-            _insertArtMsg.postValue(Resource.error("Enter name, artistName, year", null))
-            return
-        }
-        val yearInt = try {
-            year.toInt()
-        } catch (e: Exception){
-            _insertArtMsg.postValue(Resource.error("Year needs to be a number", null))
-            return
-        }
-        val art = Art(null, name, artistName, yearInt, _imageSelected.value ?: "")
-        insertArt(art)
-        setSelectedImage("")
-        _insertArtMsg.postValue(Resource.success(art))
+fun makeArt(name : String, artistName : String, year : String) {
+    if (name.isEmpty() || artistName.isEmpty() || year.isEmpty() ) {
+        _insertArtMessage.postValue(Resource.error("Enter name, artist, year", null))
+        return
     }
+
+    val yearInt = try {
+        year.toInt()
+    } catch (e: Exception) {
+        _insertArtMessage.postValue(Resource.error("Year should be number",null))
+        return
+    }
+
+    val art = Art(name, artistName, yearInt,_selectedImage.value?: "")
+    insertArt(art)
+    setSelectedImage("")
+    _insertArtMessage.postValue(Resource.success(art))
+}
     // Art Details Fragment ENDS
 
     fun searchImage(searchImageName : String) {
         if(searchImageName.isEmpty())  {
             return
         }
-
         _images.value = Resource.loading(null)              // pre-loading state
         viewModelScope.launch {
             val response = iArtRepository.searchImage(searchImageName)

@@ -12,7 +12,7 @@ import com.bumptech.glide.RequestManager
 import dagger.hilt.android.AndroidEntryPoint
 import ghar.learn.cognizant.apptddapproach.databinding.FragmentArtDetailsBinding
 import ghar.learn.cognizant.apptddapproach.R
-import ghar.learn.cognizant.apptddapproach.util.Utils
+import ghar.learn.cognizant.apptddapproach.util.Status
 import ghar.learn.cognizant.apptddapproach.viewmodel.ArtViewModel
 import javax.inject.Inject
 
@@ -34,7 +34,9 @@ class ArtsDetailFragment @Inject constructor(
         setUpObservers()
 
         binding.artImageView.setOnClickListener {
-            findNavController().navigate(ArtsDetailFragmentDirections.actionArtsDetailFragmentToImageApiFragment())
+            findNavController().navigate(
+                ArtsDetailFragmentDirections.actionArtsDetailFragmentToImageApiFragment()
+            )
         }
 
 //        onBackPressed()
@@ -48,7 +50,7 @@ class ArtsDetailFragment @Inject constructor(
 
         /**  check if inputs for crafting 'Art' are with valid-format, if it is a Pass, it is added to DB */
         binding.apply {
-            bSave.setOnClickListener {
+            saveButton.setOnClickListener {
                 viewModel.makeArt(
                     etArtName.text.toString(),
                     etArtistName.text.toString(),
@@ -58,31 +60,30 @@ class ArtsDetailFragment @Inject constructor(
     }
 
     private fun setUpObservers() {
-//        viewModel.apply {
-
+        viewModel.apply {
             // Info overall about the App Status
-            viewModel.imageSelected.observe(viewLifecycleOwner, Observer { url ->
+            selectedImageUrl.observe(viewLifecycleOwner) { url ->
                 println("image-selected-url: $url")
                 fragmentBinding?.apply {
-                        glide.load(url).into(artImageView)
+                    glide.load(url).into(artImageView)
                 }
-            })
+            }
 
-            viewModel.insertArtMsg.observe(viewLifecycleOwner, Observer { resource ->
+            insertArtMessage.observe(viewLifecycleOwner, Observer { resource ->
                 when(resource.status){
-                    Utils.Status.SUCCESS -> {
+                    Status.SUCCESS -> {
                         Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
                         findNavController().navigateUp()
-                        viewModel.resetInsertArtMsg()
+                        resetInsertArtMsg()
                     }
-                    Utils.Status.ERROR -> {
+                    Status.ERROR -> {
                         Toast.makeText(requireContext(), resource.message ?: "Error", Toast.LENGTH_LONG).show()
                     }
-                    Utils.Status.LOADING -> {  }
+                    Status.LOADING -> {  }
 
                 }
             })
-//        }
+        }
     }
 
     override fun onDestroyView() {

@@ -5,7 +5,7 @@ import ghar.learn.cognizant.apptddapproach.api.ImageApiService
 import ghar.learn.cognizant.apptddapproach.db.Art
 import ghar.learn.cognizant.apptddapproach.db.ArtDAO
 import ghar.learn.cognizant.apptddapproach.model.ImageResponse
-import ghar.learn.cognizant.apptddapproach.util.Utils.Resource
+import ghar.learn.cognizant.apptddapproach.util.Resource
 import javax.inject.Inject
 
 //class ArtRepositoryImpl  : IArtRepository {    // originally created class, before using @Inject below for DAO

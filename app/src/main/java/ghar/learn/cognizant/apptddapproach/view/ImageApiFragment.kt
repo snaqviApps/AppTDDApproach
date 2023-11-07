@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ghar.learn.cognizant.apptddapproach.R
 import ghar.learn.cognizant.apptddapproach.databinding.FragmentImageApiBinding
-import ghar.learn.cognizant.apptddapproach.util.Utils
+import ghar.learn.cognizant.apptddapproach.util.Status
 import ghar.learn.cognizant.apptddapproach.viewmodel.ArtViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -63,21 +63,19 @@ class ImageApiFragment @Inject constructor(
 
     private fun setUpObservers(){
         viewModel.images.observe(viewLifecycleOwner, Observer {apiResource ->
-            when(apiResource.status){
-                Utils.Status.SUCCESS -> {
+            when(apiResource.status) {
+                Status.SUCCESS -> {
                     val urls = apiResource.data?.hits?.map {imageResult ->
                         imageResult.previewURL
                     }
                     imageRecyclerAdapter.images = ((urls ?: listOf()) as List<String>)
                     imageApiBinding?.pBarSearchImage?.visibility = View.GONE
                 }
-
-                Utils.Status.ERROR -> {
+                Status.ERROR -> {
                     Toast.makeText(requireContext(), apiResource.message ?: "Error", Toast.LENGTH_LONG).show()
                     imageApiBinding?.pBarSearchImage?.visibility = View.GONE
                 }
-
-                Utils.Status.LOADING -> {
+                Status.LOADING -> {
                     imageApiBinding?.pBarSearchImage?.visibility = View.VISIBLE
                 }
             }
