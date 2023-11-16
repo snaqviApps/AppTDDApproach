@@ -18,7 +18,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "ghar.learn.cognizant.apptddapproach.HiltTestRunner"    // using custom-Test-Runner
+
         buildConfigField("String", "API_KEY", "${properties["API_KEY_VALUE"]}")
 
         ksp {
@@ -62,15 +64,15 @@ dependencies {
     val truthVersion = "1.1.4"
     val navigationVersion = "2.7.4"
     val glideVersion="4.16.0"
+    val fragmentTestingVersion = "1.6.2"
 
     // common libraries
     implementation(project(":kotlinreview"))                     // from module: kotlinreview
 
-    implementation("androidx.core:core-ktx:1.12.0")              // stable version for this project, 1.12.0 makes app crash
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
 
     //Dependency Injection:Hilt
     implementation("com.google.dagger:hilt-android:$daggerVersion")
@@ -83,9 +85,7 @@ dependencies {
 
     //lifeCycle, viewModel, liveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
-//    implementation("androidx.lifecycle:lifecycle-extensions:$archVersion")   ------>  deprecated
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
-//    implementation("androidx.lifecycle:lifecycle-runtime:$lifecycleVersion")      ------> Lifecycles only (without ViewModel or LiveData)
     implementation("androidx.activity:activity-ktx:1.8.0")
 
     //Room
@@ -134,7 +134,7 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.43.2")
     kspAndroidTest("com.google.dagger:hilt-android-compiler:$daggerVersion")
 
-    debugImplementation("androidx.fragment:fragment-testing:1.7.0-alpha06")
+    debugImplementation("androidx.fragment:fragment-testing:$fragmentTestingVersion")
 
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {
 //            exclude group : "org.checkerframework", module : "checker"    ----> groovy-syntax
