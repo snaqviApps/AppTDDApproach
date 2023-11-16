@@ -21,7 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-//@InstallIn(ApplicationComponent::class)       ---> does not exist
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
@@ -50,7 +49,12 @@ object AppModule {
             .create(ImageApiService::class.java)
     }
 
+    /** Inject Repo-Interface */
+    @Singleton
+    @Provides
+    fun injectRepo(dao: ArtDAO, api:ImageApiService) = ArtRepositoryImpl(dao, api) as IArtRepository
     /** Glide Injection */
+
     @Singleton
     @Provides
     fun injectGlide(@ApplicationContext context: Context) = Glide
@@ -61,9 +65,4 @@ object AppModule {
                 .error(R.drawable.baseline_error_24)
         )
 
-    /** Inject Repo-Interface */
-    @Singleton
-    @Provides
-    fun injectRepo(dao: ArtDAO, api:ImageApiService) = ArtRepositoryImpl(dao, api) as IArtRepository
 }
-

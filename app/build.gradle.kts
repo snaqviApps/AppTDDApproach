@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.test:runner:1.5.2")
     val archVersion = "2.2.0"
     val coroutineVersion = "1.7.3"
     val roomVersion = "2.6.0"

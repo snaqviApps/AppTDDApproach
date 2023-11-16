@@ -8,7 +8,6 @@ import ghar.learn.cognizant.apptddapproach.model.ImageResponse
 import ghar.learn.cognizant.apptddapproach.util.Resource
 import javax.inject.Inject
 
-//class ArtRepositoryImpl  : IArtRepository {    // originally created class, before using @Inject below for DAO
 class ArtRepositoryImpl @Inject constructor(
     private val artDAO: ArtDAO,
     private val imageApiService : ImageApiService
