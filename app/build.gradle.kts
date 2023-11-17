@@ -116,28 +116,29 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.8.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
     testImplementation("com.google.truth:truth:$truthVersion")
-    testImplementation("org.mockito:mockito-core:4.7.0")
+    testImplementation("org.mockito:mockito-core:5.7.0")
 
     // Android Test Implementations
 
-            //    androidTestImplementation "junit:junit:4.13.2"    ------> groovy-syntax
-            //    androidTestImplementation("junit:junit:4.13.2")   ------> Kotlin-syntax
-    androidTestImplementation("junit", "junit","4.13.2")    // kotlin-equivalent-syntax (to above)
+        //  androidTestImplementation("junit:junit:4.13.2")                    //  Kotlin-syntax
+    androidTestImplementation("junit", "junit","4.13.2")    //  kotlin-equivalent-syntax (to above)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("org.mockito:mockito-android:4.7.0")
+    androidTestImplementation("org.mockito:mockito-android:5.7.0")
+
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("com.google.truth:truth:$truthVersion")
 
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("org.mockito:mockito-core:4.7.0")
+    androidTestImplementation("org.mockito:mockito-core:5.7.0")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.43.2")
     kspAndroidTest("com.google.dagger:hilt-android-compiler:$daggerVersion")
 
     debugImplementation("androidx.fragment:fragment-testing:$fragmentTestingVersion")
 
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {
-//            exclude group : "org.checkerframework", module : "checker"    ----> groovy-syntax
+//    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1") {          //ver: 3.5.1 makes androidTest (instrumentation tests) failed
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.3.0") {
+//            exclude group : "org.checkerframework", module : "checker"                    //  groovy-syntax
         exclude("org.checkerframework",  "checker")
     }
 
