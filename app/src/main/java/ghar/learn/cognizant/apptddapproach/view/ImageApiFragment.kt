@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ImageApiFragment @Inject constructor(
-    private val imageRecyclerAdapter: ImageRecyclerAdapter
+    val imageRecyclerAdapter: ImageRecyclerAdapter          // removed scope 'private' so it could be made accessible in 'UI-Test method in ImageApiFragmentTest.kt first Test-call
 ): Fragment(R.layout.fragment_image_api) {
 
     lateinit var viewModel : ArtViewModel

@@ -23,7 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ArtsFragment @Inject constructor(
     private val artRecyclerAdapter: ArtRecyclerAdapter
-) : Fragment(R.layout.fragment_arts) {
+) : Fragment(R.layout.fragment_arts) {                      // provides layout, onCreateView not needed. It is using 'non-default-constructor approach' BUT it would need 'custom fragmentFactory'
 
 //    lateinit var binding : FragmentArtsBinding            when we do not need to use in onDestroy()
     private var fragmentArtsBinding : FragmentArtsBinding? = null
@@ -40,7 +40,7 @@ class ArtsFragment @Inject constructor(
             artsViewModel.deleteArt(selectedArt)
         }
     }
-    // swipe-controller ---RIGHT or LEFT--- for deletion ENDS
+    // Swipe-to-delete viewItem:  RIGHT or LEFT... ENDS
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

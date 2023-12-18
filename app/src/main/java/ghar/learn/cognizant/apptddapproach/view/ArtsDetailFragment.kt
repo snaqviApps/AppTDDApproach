@@ -76,10 +76,16 @@ class ArtsDetailFragment @Inject constructor(
                         findNavController().navigateUp()
                         resetInsertArtMsg()
                     }
+
                     Status.ERROR -> {
-                        Toast.makeText(requireContext(), resource.message ?: "Error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            resource.message ?: "Error",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                    Status.LOADING -> {  }
+
+                    Status.LOADING -> {}
 
                 }
             })
